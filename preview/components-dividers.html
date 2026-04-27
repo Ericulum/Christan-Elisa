@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Hair-.otf') format('opentype'); font-weight: 100; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Ultra-Light.otf') format('opentype'); font-weight: 200; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Thin.otf') format('opentype'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Light.otf') format('opentype'); font-weight: 350; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Medium.otf') format('opentype'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Heavy.otf') format('opentype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Bold.otf') format('opentype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Black.otf') format('opentype'); font-weight: 900; font-display: swap; }
+</style>
+<style>
+@font-face {
+  font-family: 'Hanifah Salamah';
+  src: url('../assets/fonts/Hanifah Salamah.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--color-cream); padding: 24px 40px; display: flex; flex-direction: column; gap: 20px; }
+.row { display: flex; align-items: center; gap: 16px; }
+.line { flex: 1; height: 1px; }
+.label { font-family: var(--font-serif); font-size: 10px; color: var(--color-mist); letter-spacing: 0.12em; text-transform: uppercase; width: 90px; flex-shrink: 0; }
+.ornament { font-family: var(--font-script); font-size: 18px; color: var(--color-gold); line-height: 1; padding: 0 8px; }
+.dot-row { display: flex; gap: 6px; align-items: center; justify-content: center; }
+.dot { width: 4px; height: 4px; border-radius: 50%; background: var(--color-taupe); }
+.dot.gold { background: var(--color-gold); }
+</style>
+</head><body>
+
+  <div class="row">
+    <div class="label">Hairline</div>
+    <div class="line" style="background:var(--color-taupe-light)"></div>
+  </div>
+
+  <div class="row">
+    <div class="label">Ornamental</div>
+    <div class="line" style="background:var(--color-taupe-light)"></div>
+    <div class="ornament">&amp;</div>
+    <div class="line" style="background:var(--color-taupe-light)"></div>
+  </div>
+
+  <div class="row">
+    <div class="label">Dot rule</div>
+    <div class="line" style="background:var(--color-taupe-light)"></div>
+    <div class="dot-row"><div class="dot"></div><div class="dot gold"></div><div class="dot"></div></div>
+    <div class="line" style="background:var(--color-taupe-light)"></div>
+  </div>
+
+  <div class="row">
+    <div class="label">Double rule</div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:3px"><div class="line" style="background:var(--color-gold);opacity:0.6"></div><div class="line" style="background:var(--color-taupe-light)"></div></div>
+  </div>
+
+  <div class="row">
+    <div class="label">Label rule</div>
+    <div class="line" style="background:var(--color-taupe-light)"></div>
+    <div style="font-family:var(--font-serif);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-mist);padding:0 12px;white-space:nowrap">ZEREMONIE</div>
+    <div class="line" style="background:var(--color-taupe-light)"></div>
+  </div>
+
+</body></html>

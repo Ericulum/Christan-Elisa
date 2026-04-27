@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Hair-.otf') format('opentype'); font-weight: 100; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Ultra-Light.otf') format('opentype'); font-weight: 200; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Thin.otf') format('opentype'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Light.otf') format('opentype'); font-weight: 350; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Medium.otf') format('opentype'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Heavy.otf') format('opentype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Bold.otf') format('opentype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Mixta Sharp'; src: url('../assets/fonts/Mixta-Sharp-Black.otf') format('opentype'); font-weight: 900; font-display: swap; }
+</style>
+<style>
+@font-face {
+  font-family: 'Hanifah Salamah';
+  src: url('../assets/fonts/Hanifah Salamah.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #E8E0D5; display: flex; align-items: center; justify-content: center; padding: 24px; min-height: 400px; }
+.card {
+  background: var(--color-cream);
+  width: 300px;
+  padding: 36px 32px;
+  text-align: center;
+}
+.title { font-family: var(--font-display); font-size: 32px; color: var(--color-gold); margin-bottom: 4px; }
+.sub { font-family: var(--font-serif); font-size: 11px; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-mist); margin-bottom: 24px; }
+.field { width: 100%; border: none; border-bottom: 1px solid var(--color-taupe-light); background: transparent; padding: 8px 0; font-family: var(--font-serif); font-size: 13px; font-weight: 300; color: var(--color-slate); letter-spacing: 0.04em; outline: none; margin-bottom: 16px; display: block; }
+.field::placeholder { color: var(--color-mist); }
+.options { display: flex; gap: 10px; margin-bottom: 24px; }
+.opt { flex: 1; border: 1px solid var(--color-taupe-light); padding: 10px; font-family: var(--font-serif); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-slate-light); cursor: pointer; transition: all 0.3s; }
+.opt.active { border-color: var(--color-gold); color: var(--color-gold); }
+.btn { width: 100%; background: var(--color-slate); color: var(--color-cream); font-family: var(--font-serif); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; padding: 14px; border: none; cursor: pointer; }
+</style>
+</head><body>
+<div class="card">
+  <div class="title">RSVP</div>
+  <div class="sub">Bitte bis 1. April antworten</div>
+  <input class="field" placeholder="Euer Name" type="text">
+  <input class="field" placeholder="Anzahl der Personen" type="text">
+  <div class="options">
+    <div class="opt active">Wir kommen</div>
+    <div class="opt">Leider nicht</div>
+  </div>
+  <button class="btn">Absenden</button>
+</div>
+</body></html>
