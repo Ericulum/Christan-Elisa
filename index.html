@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Elisa &amp; Christan — 08 · 08 · 2026</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-@font-face { font-family: 'Hanifah Salamah'; src: url('assets/fonts/Hanifah Salamah.otf') format('opentype'); font-weight: normal; font-display: swap; }
+@font-face { font-family: 'Hanifah Salamah'; src: url('assets/fonts/Hanifah_Salamah.otf') format('opentype'); font-weight: normal; font-display: swap; }
 @font-face { font-family: 'Mixta Sharp'; src: url('assets/fonts/Mixta-Sharp-Hair-.otf') format('opentype'); font-weight: 100; font-display: swap; }
 @font-face { font-family: 'Mixta Sharp'; src: url('assets/fonts/Mixta-Sharp-Ultra-Light.otf') format('opentype'); font-weight: 200; font-display: swap; }
 @font-face { font-family: 'Mixta Sharp'; src: url('assets/fonts/Mixta-Sharp-Thin.otf') format('opentype'); font-weight: 300; font-display: swap; }
@@ -266,8 +268,46 @@ section { padding: 120px 48px; }
 .map-wrap {
   border: 1px solid var(--taupe-light);
   overflow: hidden;
+  align-self: stretch;
+  min-height: 340px;
+  display: flex;
 }
-.map-wrap iframe { display: block; width: 100%; height: 340px; border: none; }
+.map-wrap > div { flex: 1; }
+.map-wrap iframe { display: block; width: 100%; height: 100%; min-height: 340px; border: none; }
+
+/* Light/elegant filter on map tiles to match wedding aesthetic */
+.leaflet-tile {
+  filter: grayscale(0.6) brightness(1.08) contrast(0.92);
+}
+
+/* Leaflet markers */
+.wedding-marker { background: transparent; border: none; }
+.marker-pin {
+  width: 32px; height: 40px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.marker-pin::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold); border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg); transform-origin: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+.marker-pin.marker-reception::before { background: var(--slate); }
+.marker-pin span {
+  position: relative; z-index: 1;
+  color: var(--warm-white); font-family: var(--sans);
+  font-weight: 600; font-size: 14px;
+  margin-top: -6px;
+}
+.leaflet-popup-content {
+  font-family: var(--sans); font-size: 12px; line-height: 1.5;
+  color: var(--slate);
+}
+.leaflet-popup-content b {
+  font-weight: 500; color: var(--gold);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  font-size: 10px;
+}
 
 /* ── RSVP ── */
 #rsvp { background: var(--warm-white); }
@@ -454,21 +494,21 @@ const COPY = {
       title: 'Wir freuen uns auf Euch',
     },
     programme: {
-      label: 'Das Wochenende',
-      title: 'Drei Tage mit Euch',
-      days: [
-        { date: '07. Aug', title: 'Vorfreuen', sub: 'Ankommen & gemeinsam einstimmen' },
-        { date: '08. Aug', title: 'Trauung & Feier', sub: 'Kirchliche Trauung\nund Hauptfeier' },
-        { date: '09. Aug', title: 'Ausklingen', sub: 'Gemeinsam den Tag nachwirken lassen' },
+      label: 'Der Ablauf',
+      dayTitle: 'Samstag, 08. August 2026',
+      items: [
+        { time: '12:00 Uhr', title: 'Kirchliche Trauung', sub: '' },
+        { time: '14:00 Uhr', title: 'Hauptfeier', sub: '' },
       ],
       note: 'Eine persönliche Einladung mit allen Details folgt.',
     },
     location: {
       label: 'Anreise',
-      title: 'Kirche Caputh',
+      title: 'Caputh',
       blocks: [
-        { label: 'Adresse', title: 'Kirche Caputh', body: 'Weinbergstraße 4\n14548 Schwielowsee\n(Ortsteil Caputh), Brandenburg' },
-        { label: 'Mit dem Auto', title: 'Anreise per PKW', body: 'Von Berlin ca. 45 Min.\nParkplätze am Ufer der Havel vorhanden.' },
+        { label: 'Trauung', title: 'Kirche Caputh', body: 'Straße der Einheit 1\n14548 Schwielowsee\n(Ortsteil Caputh), Brandenburg' },
+        { label: 'Hauptfeier', title: 'SchlossGalerie Haape', body: 'Krughof 38\n14548 Schwielowsee\n(Ortsteil Caputh), Brandenburg' },
+        { label: 'Mit dem Auto', title: 'Anreise per PKW', body: 'Von Berlin ca. 45 Min.\nParkplätze in Ortsnähe vorhanden.' },
         { label: 'Mit der Bahn', title: 'Anreise per Bahn', body: 'S1 bis Potsdam Hbf,\ndann Bus 609 Richtung Caputh-Geltow.' },
       ],
     },
@@ -482,8 +522,8 @@ const COPY = {
         guests: 'Anzahl Personen',
         guestsPh: '1',
         attend: ['Wir kommen gerne!', 'Wir können leider nicht'],
-        days: ['07. Aug', '08. Aug', '09. Aug'],
-        daysLabel: 'An welchen Tagen seid Ihr dabei?',
+        days: ['Trauung 12:00', 'Hauptfeier 14:00'],
+        daysLabel: 'Bei welchen Programmpunkten seid Ihr dabei?',
         submit: 'Anmeldung absenden',
       },
       success: {
@@ -495,8 +535,8 @@ const COPY = {
       label: 'Eure Fotos',
       title: 'Teilt Eure Momente',
       sub: 'Ladet hier Eure Lieblingsfotos vom Fest hoch —\nwir freuen uns über jeden eingefangenen Moment.',
-      dropTitle: 'Fotos hochladen',
-      dropSub: 'Bilder hier ablegen oder klicken zum Auswählen\nJPG, PNG oder HEIC · Bis zu 20 MB pro Datei',
+      dropTitle: 'Zur Foto-Galerie',
+      dropSub: 'Klicke hier, um Eure Fotos sicher hochzuladen\nÖffnet sich in einem neuen Tab',
       uploaded: (n) => `${n} Foto${n !== 1 ? 's' : ''} ausgewählt`,
     },
     footer: {
@@ -519,21 +559,21 @@ const COPY = {
       title: 'We cannot wait to celebrate with you',
     },
     programme: {
-      label: 'The weekend',
-      title: 'Three days together',
-      days: [
-        { date: '07 Aug', title: 'Pre-celebration', sub: 'Arrive & get in the mood together' },
-        { date: '08 Aug', title: 'Ceremony & party', sub: 'Church wedding\nand main celebration' },
-        { date: '09 Aug', title: 'Wind-down', sub: 'A gentle close to the celebrations' },
+      label: 'The schedule',
+      dayTitle: 'Saturday, 8 August 2026',
+      items: [
+        { time: '12:00', title: 'Church ceremony', sub: '' },
+        { time: '14:00', title: 'Main reception', sub: '' },
       ],
       note: 'A personal invitation with all details will follow.',
     },
     location: {
       label: 'Getting there',
-      title: 'Kirche Caputh',
+      title: 'Caputh',
       blocks: [
-        { label: 'Address', title: 'Kirche Caputh', body: 'Weinbergstraße 4\n14548 Schwielowsee\n(Caputh), Brandenburg, Germany' },
-        { label: 'By car', title: 'Driving', body: 'Approx. 45 min from Berlin.\nParking available by the Havel river.' },
+        { label: 'Ceremony', title: 'Kirche Caputh', body: 'Straße der Einheit 1\n14548 Schwielowsee\n(Caputh), Brandenburg, Germany' },
+        { label: 'Reception', title: 'SchlossGalerie Haape', body: 'Krughof 38\n14548 Schwielowsee\n(Caputh), Brandenburg, Germany' },
+        { label: 'By car', title: 'Driving', body: 'Approx. 45 min from Berlin.\nParking available nearby.' },
         { label: 'By train', title: 'Public transport', body: 'S1 to Potsdam Hbf,\nthen bus 609 towards Caputh-Geltow.' },
       ],
     },
@@ -547,8 +587,8 @@ const COPY = {
         guests: 'Number of guests',
         guestsPh: '1',
         attend: ['Yes, we will be there!', 'We are unable to attend'],
-        days: ['07 Aug', '08 Aug', '09 Aug'],
-        daysLabel: 'Which days will you join us?',
+        days: ['Ceremony 12:00', 'Reception 14:00'],
+        daysLabel: 'Which parts will you join us for?',
         submit: 'Send RSVP',
       },
       success: {
@@ -560,8 +600,8 @@ const COPY = {
       label: 'Your photos',
       title: 'Share your moments',
       sub: 'Upload your favourite photos from the celebration —\nevery captured moment means the world to us.',
-      dropTitle: 'Upload photos',
-      dropSub: 'Drop images here or click to select\nJPG, PNG or HEIC · Up to 20 MB per file',
+      dropTitle: 'Open photo gallery',
+      dropSub: 'Click here to upload your photos securely\nOpens in a new tab',
       uploaded: (n) => `${n} photo${n !== 1 ? 's' : ''} selected`,
     },
     footer: {
@@ -664,12 +704,15 @@ function Countdown({ c }) {
         </div>
         <div style={{ marginTop: 48 }}>
           <div className="section-label" style={{ marginBottom: 0 }}>{c.programme.label}</div>
+          <div style={{ fontFamily: "'Mixta Sharp', serif", fontWeight: 500, fontSize: 15, letterSpacing: '0.06em', color: 'var(--slate)', marginTop: 14 }}>
+            {c.programme.dayTitle}
+          </div>
           <div className="programme-strip" style={{ marginTop: 20 }}>
-            {c.programme.days.map((d) => (
-              <div className="prog-item" key={d.date}>
-                <span className="prog-date">{d.date}</span>
+            {c.programme.items.map((d) => (
+              <div className="prog-item" key={d.time}>
+                <span className="prog-date">{d.time}</span>
                 <span className="prog-title">{d.title}</span>
-                <span className="prog-sub">{d.sub}</span>
+                {d.sub && <span className="prog-sub">{d.sub}</span>}
               </div>
             ))}
           </div>
@@ -682,7 +725,66 @@ function Countdown({ c }) {
   );
 }
 
-function Location({ c }) {
+function CaputhMap({ lang }) {
+  const ref = useRef(null);
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    if (!window.L || !ref.current || mapRef.current) return;
+
+    const church = [52.348232, 13.001406];
+    const reception = [52.350300, 12.998231];
+    const center = [(church[0] + reception[0]) / 2, (church[1] + reception[1]) / 2];
+
+    const map = window.L.map(ref.current, { scrollWheelZoom: false }).setView(center, 16);
+    mapRef.current = map;
+
+    window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap',
+      maxZoom: 19,
+    }).addTo(map);
+
+    const churchIcon = window.L.divIcon({
+      className: 'wedding-marker',
+      html: '<div class="marker-pin marker-church"><span>1</span></div>',
+      iconSize: [32, 40],
+      iconAnchor: [16, 40],
+    });
+    const receptionIcon = window.L.divIcon({
+      className: 'wedding-marker',
+      html: '<div class="marker-pin marker-reception"><span>2</span></div>',
+      iconSize: [32, 40],
+      iconAnchor: [16, 40],
+    });
+
+    const labels = lang === 'de'
+      ? { church: '<b>Trauung</b><br/>Kirche Caputh<br/>Straße der Einheit 1', reception: '<b>Hauptfeier</b><br/>SchlossGalerie Haape<br/>Krughof 38' }
+      : { church: '<b>Ceremony</b><br/>Kirche Caputh<br/>Straße der Einheit 1', reception: '<b>Reception</b><br/>SchlossGalerie Haape<br/>Krughof 38' };
+
+    window.L.marker(church, { icon: churchIcon }).addTo(map).bindPopup(labels.church);
+    window.L.marker(reception, { icon: receptionIcon }).addTo(map).bindPopup(labels.reception);
+
+    map.fitBounds([church, reception], { padding: [60, 60], maxZoom: 17 });
+
+    // Force tile reload after layout settles
+    const sizeTimer = setTimeout(() => map.invalidateSize(), 100);
+    const sizeTimer2 = setTimeout(() => map.invalidateSize(), 500);
+    const onResize = () => map.invalidateSize();
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      clearTimeout(sizeTimer);
+      clearTimeout(sizeTimer2);
+      window.removeEventListener('resize', onResize);
+      map.remove();
+      mapRef.current = null;
+    };
+  }, [lang]);
+
+  return <div className="map-wrap"><div ref={ref} style={{ width: '100%', minHeight: 340 }}></div></div>;
+}
+
+function Location({ c, lang }) {
   return (
     <section id="location">
       <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
@@ -699,13 +801,7 @@ function Location({ c }) {
               </div>
             ))}
           </div>
-          <div className="map-wrap">
-            <iframe
-              title="Kirche Caputh"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=12.970,52.328,12.992,52.342&layer=mapnik&marker=52.3347,12.9811"
-              loading="lazy"
-            ></iframe>
-          </div>
+          <CaputhMap lang={lang} />
         </div>
       </div>
     </section>
@@ -715,7 +811,7 @@ function Location({ c }) {
 function RSVP({ c }) {
   const f = c.rsvp.fields;
   const [attending, setAttending] = useState(true);
-  const [days, setDays] = useState([true, true, true]);
+  const [days, setDays] = useState([true, true]);
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState('');
   const [guests, setGuests] = useState('');
@@ -781,11 +877,11 @@ function RSVP({ c }) {
 }
 
 function Photos({ c, lang }) {
+  const SHAREPOINT_URL = 'https://tarukinternationalgmbh.sharepoint.com/:f:/g/IgDkwtDq7LutQ60iaxjHA0TyAcWRygrrGb0dQifjHRuZf98';
+
   const [unlocked, setUnlocked] = useState(() => sessionStorage.getItem('photo_auth') === '1');
   const [pw, setPw] = useState('');
   const [error, setError] = useState(false);
-  const [drag, setDrag] = useState(false);
-  const [thumbs, setThumbs] = useState([]);
 
   const handleUnlock = () => {
     if (pw === '080826') {
@@ -796,14 +892,6 @@ function Photos({ c, lang }) {
       setError(true);
       setPw('');
     }
-  };
-
-  const handleFiles = (newFiles) => {
-    Array.from(newFiles).forEach(f => {
-      const reader = new FileReader();
-      reader.onload = e => setThumbs(prev => [...prev, e.target.result]);
-      reader.readAsDataURL(f);
-    });
   };
 
   const pwGateStyle = {
@@ -870,30 +958,20 @@ function Photos({ c, lang }) {
             </button>
           </div>
         ) : (
-          <>
-            <div
-              className={`upload-zone${drag ? ' drag-over' : ''}`}
-              onDragOver={e => { e.preventDefault(); setDrag(true); }}
-              onDragLeave={() => setDrag(false)}
-              onDrop={e => { e.preventDefault(); setDrag(false); handleFiles(e.dataTransfer.files); }}
-            >
-              <input type="file" accept="image/*" multiple onChange={e => handleFiles(e.target.files)} />
-              <svg className="upload-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <rect x="8" y="16" width="24" height="18" rx="1" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-                <path d="M20 26V10M15 15l5-5 5 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <div className="upload-title">{c.photos.dropTitle}</div>
-              <div className="upload-sub" style={{ whiteSpace: 'pre-line' }}>{c.photos.dropSub}</div>
-            </div>
-            {thumbs.length > 0 && (
-              <>
-                <div className="upload-count">{c.photos.uploaded(thumbs.length)}</div>
-                <div className="upload-preview">
-                  {thumbs.map((src, i) => <img key={i} src={src} className="preview-thumb" alt="" />)}
-                </div>
-              </>
-            )}
-          </>
+          <a
+            href={SHAREPOINT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="upload-zone"
+            style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+          >
+            <svg className="upload-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <rect x="8" y="16" width="24" height="18" rx="1" stroke="currentColor" strokeWidth="1.2" fill="none"/>
+              <path d="M20 26V10M15 15l5-5 5 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <div className="upload-title">{c.photos.dropTitle}</div>
+            <div className="upload-sub" style={{ whiteSpace: 'pre-line' }}>{c.photos.dropSub}</div>
+          </a>
         )}
       </div>
     </section>
@@ -920,7 +998,7 @@ function App() {
       <Nav lang={lang} setLang={setLang} c={c} />
       <Hero c={c} />
       <Countdown c={c} />
-      <Location c={c} />
+      <Location c={c} lang={lang} />
       <RSVP c={c} />
       <Photos c={c} lang={lang} />
       <Footer c={c} />
