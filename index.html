@@ -377,6 +377,37 @@ section { padding: 120px 48px; }
   letter-spacing: 0.06em; line-height: 2;
 }
 
+/* ── NOTES ── */
+#notes { background: var(--cream); }
+.notes-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; max-width: 900px; margin: 48px auto 0;
+  text-align: left;
+}
+.notes-block .section-label { margin-bottom: 14px; }
+.notes-text {
+  font-family: var(--sans); font-weight: 200;
+  font-size: 14px; color: var(--mist);
+  letter-spacing: 0.04em; line-height: 1.9;
+  margin-bottom: 24px;
+}
+.contacts-list { display: flex; flex-direction: column; gap: 14px; }
+.contact-item {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.contact-name {
+  font-family: var(--sans); font-weight: 600;
+  font-size: 14px; color: var(--slate);
+  letter-spacing: 0.04em;
+}
+.contact-phone {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 14px; color: var(--gold);
+  letter-spacing: 0.04em; text-decoration: none;
+  transition: color 0.2s;
+}
+.contact-phone:hover { color: var(--slate); }
+
 /* ── PHOTOS ── */
 .upload-zone {
   border: 1px dashed var(--taupe-light);
@@ -462,6 +493,7 @@ footer {
   .programme-strip { flex-direction: column; }
   .prog-item { border-right: none; border-bottom: 1px solid var(--taupe-light); }
   .location-grid { grid-template-columns: 1fr; }
+  .notes-grid { grid-template-columns: 1fr; gap: 48px; }
   .days-row { flex-wrap: wrap; }
   footer { padding: 48px 24px; }
   .hero-protea { width: 320px; right: -40px; }
@@ -539,6 +571,20 @@ const COPY = {
       dropSub: 'Klicke hier, um Eure Fotos sicher hochzuladen\nÖffnet sich in einem neuen Tab',
       uploaded: (n) => `${n} Foto${n !== 1 ? 's' : ''} ausgewählt`,
     },
+    notes: {
+      questions: {
+        label: 'Fragen?',
+        text: 'Ihr habt noch Fragen? Dann kontaktiert unsere Trauzeugen.',
+        contacts: [
+          { name: 'Lily', phone: '0178 918 563 5', tel: '01789185635' },
+          { name: 'Eric', phone: '0175 604 77 44', tel: '01756047744' },
+        ],
+      },
+      gifts: {
+        label: 'Geschenke',
+        text: 'Das größte Geschenk ist, dass Ihr diesen Tag gemeinsam mit uns feiert. Wenn Ihr uns trotzdem etwas schenken möchtet, freuen wir uns sehr über eine finanzielle Unterstützung.',
+      },
+    },
     footer: {
       note: 'Die Einladung mit allen Details folgt.\nWir freuen uns auf diesen besonderen Tag mit Euch.',
     },
@@ -603,6 +649,20 @@ const COPY = {
       dropTitle: 'Open photo gallery',
       dropSub: 'Click here to upload your photos securely\nOpens in a new tab',
       uploaded: (n) => `${n} photo${n !== 1 ? 's' : ''} selected`,
+    },
+    notes: {
+      questions: {
+        label: 'Questions?',
+        text: 'Any questions? Just get in touch with our maids of honour.',
+        contacts: [
+          { name: 'Lily', phone: '+49 178 918 563 5', tel: '+491789185635' },
+          { name: 'Eric', phone: '+49 175 604 77 44', tel: '+491756047744' },
+        ],
+      },
+      gifts: {
+        label: 'Gifts',
+        text: 'The greatest gift is that you celebrate this day with us. If you would still like to give us something, we would be very happy about a financial contribution.',
+      },
     },
     footer: {
       note: 'A personal invitation with all details will follow.\nWe look forward to celebrating with you.',
@@ -809,14 +869,57 @@ function Location({ c, lang }) {
 }
 
 function RSVP({ c }) {
+  const FORMSPREE_ID = 'xqewvoeo';
+
   const f = c.rsvp.fields;
   const [attending, setAttending] = useState(true);
   const [days, setDays] = useState([true, true]);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const [name, setName] = useState('');
   const [guests, setGuests] = useState('');
 
   const toggleDay = (i) => setDays(d => d.map((v, j) => j === i ? !v : v));
+
+  const handleSubmit = async () => {
+    if (!name.trim()) {
+      setError('Bitte gebt Euren Namen an. / Please enter your name.');
+      return;
+    }
+    setError('');
+    setSubmitting(true);
+
+    const selectedParts = attending
+      ? f.days.filter((_, i) => days[i]).join(', ') || '—'
+      : '—';
+
+    const payload = {
+      Name: name,
+      Personen: guests || '1',
+      Zusage: attending ? f.attend[0] : f.attend[1],
+      Programmpunkte: selectedParts,
+      _subject: `RSVP von ${name} – Hochzeit Elisa & Christan`,
+    };
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || 'Senden fehlgeschlagen. Bitte später erneut versuchen.');
+      }
+    } catch (e) {
+      setError('Netzwerkfehler. Bitte später erneut versuchen.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   if (submitted) {
     return (
@@ -869,7 +972,41 @@ function RSVP({ c }) {
               </div>
             </div>
           )}
-          <button className="btn-primary rsvp-submit" onClick={() => setSubmitted(true)}>{f.submit}</button>
+          {error && (
+            <div style={{ color: '#B85C2B', fontFamily: "var(--sans)", fontSize: 12, marginBottom: 16, letterSpacing: '0.04em' }}>
+              {error}
+            </div>
+          )}
+          <button className="btn-primary rsvp-submit" disabled={submitting} onClick={handleSubmit}>
+            {submitting ? '...' : f.submit}
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Notes({ c }) {
+  return (
+    <section id="notes">
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 24px' }}>
+        <div className="notes-grid">
+          <div className="notes-block">
+            <div className="section-label">{c.notes.questions.label}</div>
+            <div className="notes-text">{c.notes.questions.text}</div>
+            <div className="contacts-list">
+              {c.notes.questions.contacts.map((p) => (
+                <div className="contact-item" key={p.name}>
+                  <div className="contact-name">{p.name}</div>
+                  <a className="contact-phone" href={`tel:${p.tel}`}>{p.phone}</a>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="notes-block">
+            <div className="section-label">{c.notes.gifts.label}</div>
+            <div className="notes-text">{c.notes.gifts.text}</div>
+          </div>
         </div>
       </div>
     </section>
@@ -1000,6 +1137,7 @@ function App() {
       <Countdown c={c} />
       <Location c={c} lang={lang} />
       <RSVP c={c} />
+      <Notes c={c} />
       <Photos c={c} lang={lang} />
       <Footer c={c} />
     </>
