@@ -34,7 +34,7 @@
   --sans:        'Mixta Sharp', Georgia, serif;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 120px; }
 
 body {
   background: var(--cream);
@@ -586,7 +586,7 @@ const COPY = {
       },
     },
     footer: {
-      note: 'Die Einladung mit allen Details folgt.\nWir freuen uns auf diesen besonderen Tag mit Euch.',
+      note: 'Die Einladung folgt mit allen Details.',
     },
   },
   en: {
@@ -665,7 +665,7 @@ const COPY = {
       },
     },
     footer: {
-      note: 'A personal invitation with all details will follow.\nWe look forward to celebrating with you.',
+      note: 'A formal invitation with all details will follow.',
     },
   },
 };
@@ -708,9 +708,8 @@ function Nav({ lang, setLang, c }) {
   }, []);
   return (
     <nav className={scrolled ? 'scrolled' : ''}>
-      <a href="#hero" className="nav-logo" style={{padding: 0, display: 'flex', alignItems: 'center', gap: 12}}>
-        <img src="assets/Protea.png" alt="" style={{height: 56, width: 'auto', display: 'block', opacity: 0.7}} />
-        <span style={{fontFamily: "'Hanifah Salamah', cursive", fontSize: 26, color: 'var(--slate)', lineHeight: 1}}>Elisa <span style={{color: 'var(--gold)'}}>&#38;</span> Christan</span>
+      <a href="#hero" className="nav-logo" style={{padding: 0, display: 'flex', alignItems: 'center'}}>
+        <img src="assets/Protea.png" alt="Elisa & Christan" style={{height: 96, width: 'auto', display: 'block', opacity: 0.85}} />
       </a>
       <div className="nav-links">
         <a href="#rsvp">{c.nav.rsvp}</a>
@@ -890,16 +889,13 @@ function RSVP({ c }) {
     setError('');
     setSubmitting(true);
 
-    const selectedParts = attending
-      ? f.days.filter((_, i) => days[i]).join(', ') || '—'
-      : '—';
-
     const payload = {
       Name: name,
       Personen: guests || '1',
-      Zusage: attending ? f.attend[0] : f.attend[1],
-      Programmpunkte: selectedParts,
-      _subject: `RSVP von ${name} – Hochzeit Elisa & Christan`,
+      Zusage: attending ? 'JA – wir kommen' : 'NEIN – wir können nicht',
+      'Trauung 12:00': attending ? (days[0] ? '✓ dabei' : '— nicht dabei') : '—',
+      'Hauptfeier 14:00': attending ? (days[1] ? '✓ dabei' : '— nicht dabei') : '—',
+      _subject: `RSVP ${attending ? '✓' : '✗'} – ${name}`,
     };
 
     try {
