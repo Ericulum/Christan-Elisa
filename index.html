@@ -46,9 +46,9 @@ body {
 
 /* ── NAV ── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 48px;
+  padding: 20px 48px 20px 88px;
   background: rgba(253,250,246,0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid transparent;
@@ -151,12 +151,12 @@ section { padding: 120px 48px; }
 }
 .hero-names .amp { color: var(--gold); }
 .hero-headline {
-  font-family: var(--script); font-size: 30px;
+  font-family: var(--script); font-size: 44px;
   color: var(--slate-light); line-height: 1.4;
   margin-bottom: 8px;
 }
 .hero-sub {
-  font-family: var(--script); font-size: 22px;
+  font-family: var(--script); font-size: 30px;
   color: var(--mist); line-height: 1.4;
   margin-bottom: 48px;
 }
@@ -279,6 +279,13 @@ section { padding: 120px 48px; }
 .leaflet-tile {
   filter: grayscale(0.6) brightness(1.08) contrast(0.92);
 }
+/* Keep Leaflet under the fixed navbar */
+.leaflet-container,
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom,
+.leaflet-control { z-index: 5 !important; }
+.leaflet-popup-pane { z-index: 6 !important; }
 
 /* Leaflet markers */
 .wedding-marker { background: transparent; border: none; }
@@ -480,13 +487,14 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 700px) {
-  nav { padding: 16px 24px; }
+  nav { padding: 16px 24px 16px 40px; }
   .nav-links { gap: 20px; }
   .nav-links a { display: none; }
   section { padding: 80px 24px; }
   #hero { padding: 100px 24px 60px; }
   .hero-names { font-size: 64px; }
-  .hero-headline { font-size: 22px; }
+  .hero-headline { font-size: 32px; }
+  .hero-sub { font-size: 22px; }
   .countdown-grid { gap: 0; flex-wrap: wrap; }
   .countdown-item { padding: 24px 20px; flex: 0 0 50%; border-bottom: 1px solid var(--taupe-light); }
   .countdown-num { font-size: 44px; }
