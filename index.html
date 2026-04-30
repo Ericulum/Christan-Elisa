@@ -384,6 +384,31 @@ section { padding: 120px 48px; }
   letter-spacing: 0.06em; line-height: 2;
 }
 
+/* ── MUSIC ── */
+#music { background: var(--warm-white); }
+.music-frame-wrap {
+  max-width: 680px; margin: 48px auto 0;
+  background: var(--cream);
+  border: 1px solid var(--taupe-light);
+  position: relative;
+  padding: 24px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+}
+.music-frame-wrap::before,
+.music-frame-wrap::after {
+  content: ''; position: absolute;
+  width: 24px; height: 24px;
+  border: 1px solid var(--gold);
+  opacity: 0.5;
+}
+.music-frame-wrap::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+.music-frame-wrap::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+.music-frame { width: 100%; border: none; display: block; background: transparent; }
+.music-icon {
+  display: block; margin: 0 auto 18px;
+  color: var(--gold);
+}
+
 /* ── NOTES ── */
 #notes { background: var(--cream); }
 .notes-grid {
@@ -519,7 +544,7 @@ const { useState, useEffect, useRef } = React;
 /* ── COPY ── */
 const COPY = {
   de: {
-    nav: { rsvp: 'Anmeldung', location: 'Anreise', photos: 'Fotos' },
+    nav: { rsvp: 'Anmeldung', location: 'Anreise', music: 'Songs', photos: 'Fotos' },
     hero: {
       tag: '08 | 08 | 2026  ·  Kirche Caputh',
       headline: 'Wir heiraten –',
@@ -593,12 +618,17 @@ const COPY = {
         text: 'Das größte Geschenk ist, dass Ihr diesen Tag gemeinsam mit uns feiert. Wenn Ihr uns trotzdem etwas schenken möchtet, freuen wir uns sehr über eine finanzielle Unterstützung.',
       },
     },
+    music: {
+      label: 'Eure Songwünsche',
+      title: 'Welcher Song darf nicht fehlen?',
+      sub: 'Helft uns, die perfekte Playlist für den Partyabend zu bauen.\nReicht hier Eure Lieblingssongs ein — wir freuen uns auf Eure Auswahl!',
+    },
     footer: {
       note: 'Die Einladung folgt mit allen Details.',
     },
   },
   en: {
-    nav: { rsvp: 'RSVP', location: 'Getting there', photos: 'Photos' },
+    nav: { rsvp: 'RSVP', location: 'Getting there', music: 'Songs', photos: 'Photos' },
     hero: {
       tag: '08 | 08 | 2026  ·  Kirche Caputh',
       headline: 'We are getting married –',
@@ -672,6 +702,11 @@ const COPY = {
         text: 'The greatest gift is that you celebrate this day with us. If you would still like to give us something, we would be very happy about a financial contribution.',
       },
     },
+    music: {
+      label: 'Your song requests',
+      title: 'Which song should we not miss?',
+      sub: 'Help us build the perfect playlist for the party.\nSubmit your favourite songs here — we look forward to your picks!',
+    },
     footer: {
       note: 'A formal invitation with all details will follow.',
     },
@@ -722,6 +757,7 @@ function Nav({ lang, setLang, c }) {
       <div className="nav-links">
         <a href="#rsvp">{c.nav.rsvp}</a>
         <a href="#location">{c.nav.location}</a>
+        <a href="#music">{c.nav.music}</a>
         <a href="#photos">{c.nav.photos}</a>
         <div className="lang-toggle">
           <button className={`lang-btn${lang === 'de' ? ' active' : ''}`} onClick={() => setLang('de')}>DE</button>
@@ -990,6 +1026,34 @@ function RSVP({ c }) {
   );
 }
 
+function Music({ c }) {
+  const FORM_EMBED_URL = 'https://airtable.com/embed/appJsaCJVTfioQpPq/shr45K21Otv9j92Hr';
+  return (
+    <section id="music">
+      <div className="section-inner">
+        <div className="section-label">{c.music.label}</div>
+        <div className="section-title">{c.music.title}</div>
+        <OrnamentRow />
+        <div style={{ fontFamily: "'Mixta Sharp', serif", fontWeight: 200, fontSize: 13, color: 'var(--mist)', letterSpacing: '0.06em', whiteSpace: 'pre-line' }}>
+          {c.music.sub}
+        </div>
+        <div className="music-frame-wrap">
+          <svg className="music-icon" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M12 22a3 3 0 1 1-3-3 3 3 0 0 1 3 3Zm14-3a3 3 0 1 0 3 3 3 3 0 0 0-3-3Zm0 0V8L12 11v11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+          </svg>
+          <iframe
+            className="music-frame"
+            src={FORM_EMBED_URL}
+            title="Songwünsche"
+            height="640"
+            frameBorder="0"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Notes({ c }) {
   return (
     <section id="notes">
@@ -1142,6 +1206,7 @@ function App() {
       <Location c={c} lang={lang} />
       <RSVP c={c} />
       <Notes c={c} />
+      <Music c={c} />
       <Photos c={c} lang={lang} />
       <Footer c={c} />
     </>
