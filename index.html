@@ -49,39 +49,40 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 48px 20px 88px;
-  background: rgba(255,255,255,0.92);
+  background: rgba(26,37,48,0.95);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid transparent;
   transition: border-color 0.4s;
 }
-nav.scrolled { border-bottom-color: var(--taupe-light); }
+nav.scrolled { border-bottom-color: rgba(255,255,255,0.1); }
 .nav-logo {
   font-family: var(--script);
   font-size: 26px;
-  color: var(--slate);
+  color: var(--cream);
   text-decoration: none;
   line-height: 1;
 }
-.nav-logo span { color: var(--gold); }
+.nav-logo span { color: var(--gold-light); }
+.nav-logo img { filter: brightness(0) invert(1); opacity: 0.95; }
 .nav-links { display: flex; gap: 36px; align-items: center; }
 .nav-links a {
   font-family: var(--sans); font-weight: 400; font-size: 15px;
   letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--mist); text-decoration: none;
+  color: rgba(255,255,255,0.7); text-decoration: none;
   transition: color 0.2s;
 }
-.nav-links a:hover { color: var(--slate); }
+.nav-links a:hover { color: var(--cream); }
 .lang-toggle {
-  display: flex; gap: 0; border: 1px solid var(--taupe-light);
+  display: flex; gap: 0; border: 1px solid rgba(255,255,255,0.25);
 }
 .lang-btn {
   background: none; border: none; cursor: pointer;
   font-family: var(--sans); font-weight: 400; font-size: 14px;
   letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--mist); padding: 6px 12px;
+  color: rgba(255,255,255,0.65); padding: 6px 12px;
   transition: all 0.2s;
 }
-.lang-btn.active { background: var(--slate); color: var(--cream); }
+.lang-btn.active { background: var(--cream); color: var(--slate); }
 
 /* ── SECTIONS ── */
 section { padding: 120px 48px; }
