@@ -63,6 +63,9 @@ nav.scrolled { border-bottom-color: rgba(0,0,0,0.08); }
   line-height: 1;
 }
 .nav-logo span { color: var(--gold); }
+.nav-logo img {
+  filter: brightness(0) saturate(100%) invert(58%) sepia(58%) saturate(537%) hue-rotate(8deg) brightness(91%) contrast(86%);
+}
 .nav-links { display: flex; gap: 36px; align-items: center; }
 .nav-links a {
   font-family: var(--sans); font-weight: 400; font-size: 15px;
@@ -162,12 +165,12 @@ section { padding: 120px 48px; }
 }
 .hero-names .amp { color: var(--gold); }
 .hero-headline {
-  font-family: var(--script); font-size: 44px;
+  font-family: var(--script); font-size: 64px;
   color: var(--slate-light); line-height: 1.4;
   margin-bottom: 8px;
 }
 .hero-sub {
-  font-family: var(--script); font-size: 30px;
+  font-family: var(--script); font-size: 44px;
   color: var(--mist); line-height: 1.4;
   margin-bottom: 48px;
 }
@@ -529,8 +532,8 @@ footer {
   section { padding: 80px 24px; }
   #hero { padding: 100px 24px 60px; }
   .hero-names { font-size: 64px; }
-  .hero-headline { font-size: 32px; }
-  .hero-sub { font-size: 22px; }
+  .hero-headline { font-size: 44px; }
+  .hero-sub { font-size: 30px; }
   .countdown-grid { gap: 0; flex-wrap: wrap; }
   .countdown-item { padding: 24px 20px; flex: 0 0 50%; border-bottom: 1px solid var(--taupe-light); }
   .countdown-num { font-size: 44px; }
