@@ -21,15 +21,15 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --gold:        #B8922B;
-  --gold-light:  #D4AE52;
-  --slate:       #3F5059;
-  --slate-light: #5C7080;
-  --taupe:       #C0B2AA;
+  --gold:        #9C7A1F;
+  --gold-light:  #B89540;
+  --slate:       #2B3A43;
+  --slate-light: #4A5B66;
+  --taupe:       #A89B92;
   --taupe-light: #DDD4CE;
   --cream:       #FDFAF6;
   --warm-white:  #F3EDE4;
-  --mist:        #9E9088;
+  --mist:        #6E635B;
   --script:      'Hanifah Salamah', cursive;
   --sans:        'Mixta Sharp', Georgia, serif;
 }
@@ -65,7 +65,7 @@ nav.scrolled { border-bottom-color: var(--taupe-light); }
 .nav-logo span { color: var(--gold); }
 .nav-links { display: flex; gap: 36px; align-items: center; }
 .nav-links a {
-  font-family: var(--sans); font-weight: 300; font-size: 11px;
+  font-family: var(--sans); font-weight: 400; font-size: 13px;
   letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--mist); text-decoration: none;
   transition: color 0.2s;
@@ -76,7 +76,7 @@ nav.scrolled { border-bottom-color: var(--taupe-light); }
 }
 .lang-btn {
   background: none; border: none; cursor: pointer;
-  font-family: var(--sans); font-weight: 300; font-size: 10px;
+  font-family: var(--sans); font-weight: 400; font-size: 12px;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--mist); padding: 6px 12px;
   transition: all 0.2s;
@@ -91,7 +91,7 @@ section { padding: 120px 48px; }
 }
 
 .section-label {
-  font-family: var(--sans); font-weight: 300; font-size: 10px;
+  font-family: var(--sans); font-weight: 400; font-size: 12px;
   letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--mist); margin-bottom: 20px;
 }
@@ -140,7 +140,7 @@ section { padding: 120px 48px; }
 .hero-inner { position: relative; z-index: 1; text-align: center; }
 .hero-date {
   font-family: var(--sans); font-weight: 500;
-  font-size: 13px; letter-spacing: 0.32em;
+  font-size: 15px; letter-spacing: 0.32em;
   text-transform: uppercase; color: var(--gold);
   margin-bottom: 32px;
 }
@@ -161,17 +161,17 @@ section { padding: 120px 48px; }
   margin-bottom: 48px;
 }
 .hero-location {
-  font-family: var(--sans); font-weight: 300;
-  font-size: 12px; letter-spacing: 0.2em;
+  font-family: var(--sans); font-weight: 400;
+  font-size: 14px; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--mist);
   margin-bottom: 48px;
 }
 .btn-primary {
   display: inline-block;
   background: var(--slate); color: var(--cream);
-  border: none; padding: 16px 44px;
-  font-family: var(--sans); font-weight: 300;
-  font-size: 11px; letter-spacing: 0.22em;
+  border: none; padding: 18px 48px;
+  font-family: var(--sans); font-weight: 400;
+  font-size: 13px; letter-spacing: 0.22em;
   text-transform: uppercase; cursor: pointer;
   text-decoration: none;
   transition: background 0.25s;
@@ -180,9 +180,9 @@ section { padding: 120px 48px; }
 .btn-outline {
   display: inline-block;
   background: transparent; color: var(--slate);
-  border: 1px solid var(--taupe-light); padding: 16px 44px;
-  font-family: var(--sans); font-weight: 300;
-  font-size: 11px; letter-spacing: 0.22em;
+  border: 1px solid var(--slate-light); padding: 18px 48px;
+  font-family: var(--sans); font-weight: 400;
+  font-size: 13px; letter-spacing: 0.22em;
   text-transform: uppercase; cursor: pointer;
   text-decoration: none;
   transition: all 0.25s;
@@ -209,8 +209,8 @@ section { padding: 120px 48px; }
   letter-spacing: -0.02em;
 }
 .countdown-label {
-  font-family: var(--sans); font-weight: 200;
-  font-size: 10px; letter-spacing: 0.24em;
+  font-family: var(--sans); font-weight: 400;
+  font-size: 12px; letter-spacing: 0.24em;
   text-transform: uppercase; color: var(--mist);
   display: block; margin-top: 10px;
 }
@@ -227,19 +227,19 @@ section { padding: 120px 48px; }
 .prog-item:last-child { border-right: none; }
 .prog-date {
   font-family: var(--sans); font-weight: 600;
-  font-size: 22px; color: var(--gold);
+  font-size: 26px; color: var(--gold);
   letter-spacing: 0.04em; display: block;
   margin-bottom: 8px;
 }
 .prog-title {
   font-family: var(--sans); font-weight: 500;
-  font-size: 11px; letter-spacing: 0.16em;
+  font-size: 13px; letter-spacing: 0.16em;
   text-transform: uppercase; color: var(--slate);
   display: block; margin-bottom: 6px;
 }
 .prog-sub {
-  font-family: var(--sans); font-weight: 200;
-  font-size: 11px; color: var(--mist);
+  font-family: var(--sans); font-weight: 300;
+  font-size: 13px; color: var(--mist);
   letter-spacing: 0.06em; line-height: 1.6;
 }
 
@@ -251,19 +251,19 @@ section { padding: 120px 48px; }
 .location-info { display: flex; flex-direction: column; gap: 28px; }
 .loc-block {}
 .loc-label {
-  font-family: var(--sans); font-weight: 300; font-size: 10px;
+  font-family: var(--sans); font-weight: 400; font-size: 12px;
   letter-spacing: 0.24em; text-transform: uppercase;
   color: var(--gold); margin-bottom: 8px;
 }
 .loc-title {
   font-family: var(--sans); font-weight: 600;
-  font-size: 16px; color: var(--slate);
+  font-size: 18px; color: var(--slate);
   letter-spacing: 0.04em; margin-bottom: 6px;
 }
 .loc-body {
-  font-family: var(--sans); font-weight: 200;
-  font-size: 13px; color: var(--mist);
-  letter-spacing: 0.04em; line-height: 2;
+  font-family: var(--sans); font-weight: 300;
+  font-size: 15px; color: var(--mist);
+  letter-spacing: 0.04em; line-height: 1.9;
 }
 .map-wrap {
   border: 1px solid var(--taupe-light);
@@ -322,7 +322,7 @@ section { padding: 120px 48px; }
 .form-row { margin-bottom: 28px; }
 .form-label {
   display: block;
-  font-family: var(--sans); font-weight: 300; font-size: 10px;
+  font-family: var(--sans); font-weight: 400; font-size: 12px;
   letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--mist); margin-bottom: 10px;
 }
@@ -341,7 +341,7 @@ section { padding: 120px 48px; }
 .toggle-btn {
   flex: 1; border: 1px solid var(--taupe-light);
   background: transparent; padding: 13px 8px;
-  font-family: var(--sans); font-weight: 300; font-size: 11px;
+  font-family: var(--sans); font-weight: 400; font-size: 13px;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--mist); cursor: pointer;
   transition: all 0.25s;
@@ -354,7 +354,7 @@ section { padding: 120px 48px; }
 .day-btn {
   flex: 1; border: 1px solid var(--taupe-light);
   background: transparent; padding: 13px 4px;
-  font-family: var(--sans); font-weight: 300; font-size: 10px;
+  font-family: var(--sans); font-weight: 400; font-size: 12px;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--mist); cursor: pointer;
   transition: all 0.25s; text-align: center;
@@ -418,9 +418,9 @@ section { padding: 120px 48px; }
 }
 .notes-block .section-label { margin-bottom: 14px; }
 .notes-text {
-  font-family: var(--sans); font-weight: 200;
-  font-size: 14px; color: var(--mist);
-  letter-spacing: 0.04em; line-height: 1.9;
+  font-family: var(--sans); font-weight: 300;
+  font-size: 16px; color: var(--mist);
+  letter-spacing: 0.04em; line-height: 1.85;
   margin-bottom: 24px;
 }
 .contacts-list { display: flex; flex-direction: column; gap: 14px; }
@@ -429,12 +429,12 @@ section { padding: 120px 48px; }
 }
 .contact-name {
   font-family: var(--sans); font-weight: 600;
-  font-size: 14px; color: var(--slate);
+  font-size: 16px; color: var(--slate);
   letter-spacing: 0.04em;
 }
 .contact-phone {
-  font-family: var(--sans); font-weight: 300;
-  font-size: 14px; color: var(--gold);
+  font-family: var(--sans); font-weight: 400;
+  font-size: 16px; color: var(--gold);
   letter-spacing: 0.04em; text-decoration: none;
   transition: color 0.2s;
 }
@@ -498,16 +498,16 @@ footer {
 }
 .footer-names span { color: var(--gold); }
 .footer-date {
-  font-family: var(--sans); font-weight: 200;
-  font-size: 12px; letter-spacing: 0.28em;
-  text-transform: uppercase; color: rgba(253,250,246,0.4);
+  font-family: var(--sans); font-weight: 300;
+  font-size: 14px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: rgba(253,250,246,0.7);
   margin-bottom: 32px;
 }
-.footer-line { width: 40px; height: 1px; background: rgba(255,255,255,0.15); margin: 24px auto; }
+.footer-line { width: 40px; height: 1px; background: rgba(255,255,255,0.3); margin: 24px auto; }
 .footer-note {
-  font-family: var(--sans); font-weight: 200;
-  font-size: 11px; letter-spacing: 0.1em;
-  color: rgba(253,250,246,0.35); line-height: 2;
+  font-family: var(--sans); font-weight: 300;
+  font-size: 13px; letter-spacing: 0.1em;
+  color: rgba(253,250,246,0.7); line-height: 2;
 }
 
 /* ── RESPONSIVE ── */
@@ -544,7 +544,7 @@ const { useState, useEffect, useRef } = React;
 /* ── COPY ── */
 const COPY = {
   de: {
-    nav: { rsvp: 'Anmeldung', location: 'Anreise', music: 'Songs', photos: 'Fotos' },
+    nav: { location: 'Anreise', music: 'Songs', photos: 'Fotos' },
     hero: {
       tag: '08 | 08 | 2026  ·  Kirche Caputh',
       headline: 'Wir heiraten –',
@@ -628,7 +628,7 @@ const COPY = {
     },
   },
   en: {
-    nav: { rsvp: 'RSVP', location: 'Getting there', music: 'Songs', photos: 'Photos' },
+    nav: { location: 'Getting there', music: 'Songs', photos: 'Photos' },
     hero: {
       tag: '08 | 08 | 2026  ·  Kirche Caputh',
       headline: 'We are getting married –',
@@ -755,7 +755,6 @@ function Nav({ lang, setLang, c }) {
         <img src="assets/Protea.png" alt="Elisa & Christan" style={{height: 96, width: 'auto', display: 'block', opacity: 0.85}} />
       </a>
       <div className="nav-links">
-        <a href="#rsvp">{c.nav.rsvp}</a>
         <a href="#location">{c.nav.location}</a>
         <a href="#music">{c.nav.music}</a>
         <a href="#photos">{c.nav.photos}</a>
@@ -780,8 +779,7 @@ function Hero({ c }) {
         <div className="hero-sub">{c.hero.sub}</div>
         <div className="hero-location">{c.hero.location}</div>
         <div className="btn-row">
-          <a href="#rsvp" className="btn-primary">{c.hero.cta}</a>
-          <a href="#location" className="btn-outline">{c.hero.ctaLocation}</a>
+          <a href="#location" className="btn-primary">{c.hero.ctaLocation}</a>
         </div>
       </div>
     </section>
@@ -807,7 +805,7 @@ function Countdown({ c }) {
         </div>
         <div style={{ marginTop: 48 }}>
           <div className="section-label" style={{ marginBottom: 0 }}>{c.programme.label}</div>
-          <div style={{ fontFamily: "'Mixta Sharp', serif", fontWeight: 500, fontSize: 15, letterSpacing: '0.06em', color: 'var(--slate)', marginTop: 14 }}>
+          <div style={{ fontFamily: "'Mixta Sharp', serif", fontWeight: 500, fontSize: 17, letterSpacing: '0.06em', color: 'var(--slate)', marginTop: 14 }}>
             {c.programme.dayTitle}
           </div>
           <div className="programme-strip" style={{ marginTop: 20 }}>
@@ -981,7 +979,7 @@ function RSVP({ c }) {
         <div className="section-label">{c.rsvp.label}</div>
         <div className="section-title">{c.rsvp.title}</div>
         <OrnamentRow />
-        <div style={{ fontFamily: "'Mixta Sharp', serif", fontWeight: 200, fontSize: 13, color: 'var(--mist)', letterSpacing: '0.06em', marginBottom: 0 }}>
+        <div style={{ fontFamily: "'Mixta Sharp', serif", fontWeight: 300, fontSize: 16, color: 'var(--mist)', letterSpacing: '0.06em', marginBottom: 0 }}>
           {c.rsvp.sub}
         </div>
         <div className="rsvp-form">
@@ -1034,7 +1032,7 @@ function Music({ c }) {
         <div className="section-label">{c.music.label}</div>
         <div className="section-title">{c.music.title}</div>
         <OrnamentRow />
-        <div style={{ fontFamily: "'Mixta Sharp', serif", fontWeight: 200, fontSize: 13, color: 'var(--mist)', letterSpacing: '0.06em', whiteSpace: 'pre-line' }}>
+        <div style={{ fontFamily: "'Mixta Sharp', serif", fontWeight: 300, fontSize: 16, color: 'var(--mist)', letterSpacing: '0.06em', whiteSpace: 'pre-line' }}>
           {c.music.sub}
         </div>
         <div className="music-frame-wrap">
@@ -1130,7 +1128,7 @@ function Photos({ c, lang }) {
         <div className="section-label">{c.photos.label}</div>
         <div className="section-title">{c.photos.title}</div>
         <OrnamentRow />
-        <div style={{ fontFamily: "'Mixta Sharp', serif", fontWeight: 200, fontSize: 13, color: 'var(--mist)', letterSpacing: '0.06em', whiteSpace: 'pre-line', marginBottom: 0 }}>
+        <div style={{ fontFamily: "'Mixta Sharp', serif", fontWeight: 300, fontSize: 16, color: 'var(--mist)', letterSpacing: '0.06em', whiteSpace: 'pre-line', marginBottom: 0 }}>
           {c.photos.sub}
         </div>
 
@@ -1204,7 +1202,6 @@ function App() {
       <Hero c={c} />
       <Countdown c={c} />
       <Location c={c} lang={lang} />
-      <RSVP c={c} />
       <Notes c={c} />
       <Music c={c} />
       <Photos c={c} lang={lang} />
